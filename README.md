@@ -1,16 +1,16 @@
 # Filebeat-to-logstash
 
-## /etc/filebeat/filebeat.yml
+### /etc/filebeat/filebeat.yml
 
 Comment out `output.elasticsearch:` and `hosts: ["localhost:9200"]`
 
-uncomment `output.logstash:` and ["logstashhost:5044"]
-
-## /etc/logstash/logstash.yml
+uncomment `output.logstash:` and `["logstashhost:5044"]`
 
 
-## /etc/logstash/conf.d/beats-to-logstash.conf
+## On the logstash host
 
+### /etc/logstash/conf.d/beats-to-logstash.conf
+```conf
 input {
     beats {
         port => "5044"
@@ -24,8 +24,9 @@ input {
 output {
     stdout { codec => rubydebug }
 }
+```
 
-## Test beats-to-logstash.conf
+### Test beats-to-logstash.conf
 
 ```bash
 cd /etc/logstash/conf.d/
